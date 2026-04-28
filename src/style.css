@@ -1,0 +1,223 @@
+:root{
+    --color-primario: #265c1b;
+    --color-fondo: #f0f0f0;
+    --color-texto: #333;
+    --color-blanco: #fff;
+    --color-borde: #ddd;
+    --color-focus: #97ec82;
+    --color-grayedOut: #666;
+}
+
+.layout {
+    display: flex;
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+#lista-categorias a {
+    text-decoration: none;
+    color: var(--color-texto);
+    display: block;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+
+*{
+    padding:0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: var( --color-fondo);
+}
+
+.main{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.sidebar {
+    flex: 0 0 250px;
+    background: var(--color-blanco);
+    border-radius: 12px;
+    padding: 20px;
+    padding-top: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    align-self: start;
+}
+
+.main-content {
+    flex: 1;
+    min-width: 0;
+}
+
+
+.register-form{
+    display:flex;
+    flex-direction: column;
+    background-color: var(--color-blanco);
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0,0,0);
+}
+
+.register-form h1{
+    color: var(--color-primario);
+    text-align: center;
+    letter-spacing: 2px;
+    font-size: 28px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.register-form h2{
+    color: var(--color-texto);
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-form{
+    display:flex;
+    flex-direction: column;
+    background-color: var(--color-blanco);
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0,0,0);
+}
+
+.login-form h1{
+    color: var(--color-primario);
+    text-align: center;
+    letter-spacing: 2px;
+    font-size: 28px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.login-form h2{
+    color: var(--color-texto);
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label{
+    color: var(--color-texto);
+    font-weight: bold;
+}
+
+input{
+    padding: 10px;
+    border: 2px solid var(--color-borde);
+    border-radius: 5px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+input:focus{
+    background-color: var(--color-focus);
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+.registro a{
+  color: var(--color-primario);
+  text-decoration: none;
+}
+
+button{
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    display: inline-block;
+    font-size: 14px;
+    margin-bottom: 10px;
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    display: block;
+    width: 100%;
+}
+
+
+#contenedor-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    justify-items: center;
+    padding-top: 1.5rem;
+    padding: 20px;
+    width: 100%;
+}
+
+#contenedor-productos li {
+    background: var(--color-blanco);
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    list-style: none;
+    text-align: center;
+}
+
+#contenedor-productos h3 {
+    color: var(--color-texto);
+    font-size: 1.3rem;
+    margin: 10px 0;
+}
+
+#lista-categorias a {
+    text-decoration: none;
+    color: var(--color-texto);
+    display: block;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 1rem;
+    color: var(--color-grayedOut);
+    font-size: 0.8rem;
+}
+
+header {
+    text-align: left;
+    margin-top: 1rem;
+    padding: 1rem;
+    color: var(--color-primario);
+    font-size: 30px;
+}
+
+.cart-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    position: absolute;
+    right: 20px;
+  
+    font-size: 1.2rem;
+}
+.cart-icon span {
+    color: var(--color-texto);
+    padding: 0 6px;
+    margin-left: 6px;
+}
+
+.cart-icon img {
+    width: 24px;
+    height: 24px;
+}

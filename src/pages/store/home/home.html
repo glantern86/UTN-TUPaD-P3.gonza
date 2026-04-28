@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        
+        <link rel="stylesheet" href="../../../style.css">
+    </head>
+    
+    <body>
+        <header>
+            <h1>Mint food store</h1>
+            <a href="cart.html" class="cart-icon">
+                <img src="../../../../cartIcon.webp" alt="Carrito">
+                <span id="cart-counter">0</span>
+            </a>
+        </header>
+        <main>
+
+            
+            <div class="layout">
+                <aside class="sidebar">
+                    <form class = "searchBox" id="searchbox">
+                        <input type="text" placeholder="Buscar productos...">
+                        <button type="submit">Buscar</button>
+                    </form>
+                    <button id="btnTodos">Todos los Productos</button>
+                    <br>
+                    <ul id="lista-categorias"></ul>
+                </aside>
+
+                <div class="container">
+                    <section id="contenedor-productos"></section>
+                </div>
+                <div id="noResultados" style="display: none; text-align: center; padding: 20px;">
+                    <h3>No hay productos disponibles</h3>
+                    <p>Intenta con otra búsqueda.</p>
+                </div>
+            </div>
+        </main>
+
+        <script type="module" src="./home.ts"></script>
+        <script src="../../../data/data.ts"></script>
+
+    </body>
+    <footer>
+        <hr>
+        <p>©2026 foodie company</p>
+    </footer>
+
+</html>
