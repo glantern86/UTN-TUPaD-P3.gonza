@@ -4,6 +4,8 @@ const listaCategorias = document.getElementById("lista-categorias");
 const listaProductos = document.getElementById("contenedor-productos");
 const inputKey = document.querySelector<HTMLInputElement>("#searchbox");
 const botonTodos = document.querySelector<HTMLButtonElement>("#btnTodos");
+let categoriaActiva: string | null = null;
+
 interface Itemcarrito {
   id: number;
   nombre: string;
@@ -11,52 +13,47 @@ interface Itemcarrito {
   cantidad: number;
   imagen?: string;
 };
-let carritoContador: number;
-let categoriaActiva: string | null = null;
-//const mensaje = document.getElementById("noResultados");
 
 function renderizarProductos(productos: Product[]) {
     if (!listaProductos) return;
     listaProductos.innerHTML = '';
 
     productos.forEach((producto) => {
-    const li = document.createElement('li');
-    li.setAttribute('data-nombre', producto.nombre.toLowerCase());
-    li.innerHTML = `
-        <h3>${producto.nombre}</h3>
-        <element id="${producto.nombre}"></element>
-        <img src="../../../../foodPlaceholder.webp" 
-            style="width:128px;height:128px;" 
-            alt="${producto.nombre}">
-        <p>${producto.descripcion}</p>
-        <p>Precio: <strong>${producto.precio}</strong></p>
-        <input type="submit" value="Agregar" class="boton-agregar">
-    `;
-    listaProductos.appendChild(li);
+        const li = document.createElement('li');
+        li.setAttribute('data-nombre', producto.nombre.toLowerCase());
+        li.innerHTML = `
+            <h3>${producto.nombre}</h3>
+            <element id="${producto.nombre}"></element>
+            <img src="../../../../foodPlaceholder.webp" 
+                style="width:128px;height:128px;" 
+                alt="${producto.nombre}">
+            <p>${producto.descripcion}</p>
+            <p>Precio: <strong>${producto.precio}</strong></p>
+            <input type="submit" value="Agregar" class="boton-agregar">
+        `;
+        listaProductos.appendChild(li);
 
-    const botonAgregar = li.querySelector('.boton-agregar');
-    if (botonAgregar) {
-        botonAgregar.addEventListener('click', () => {
-            let carrito = obtenerCarrito();
-            const sumarProducto = carrito.find(item => item.id === producto.id);
-            if(sumarProducto){
-                sumarProducto.cantidad = sumarProducto.cantidad +1
-            } else {
-                carrito.push({
-                    id: producto.id,
-                    nombre: producto.nombre,
-                    precio: producto.precio,
-                    cantidad: 1,
-                    imagen: producto.imagen
-                });
-            }
+        const botonAgregar = li.querySelector('.boton-agregar');
+        if (botonAgregar) {
+            botonAgregar.addEventListener('click', () => {
+                let carrito = obtenerCarrito();
+                const sumarProducto = carrito.find(item => item.id === producto.id);
+                if(sumarProducto){
+                    sumarProducto.cantidad = sumarProducto.cantidad +1
+                } else {
+                    carrito.push({
+                        id: producto.id,
+                        nombre: producto.nombre,
+                        precio: producto.precio,
+                        cantidad: 1,
+                        imagen: producto.imagen
+                    });
+                }
+                alert(`${producto.nombre} agregado al carrito`);
                 guardarCarrito(carrito);
-                //actualizarContadorCarrito();
-                //alert(`Agregaste ${producto.nombre} a tu carrito`);
-        //alert(`Agregaste ${producto.nombre} a tu carrito`);
-        });
-    }
-  });
+            });
+        }
+    });
 }
 
 const cargarCategorias=()=> {
@@ -70,13 +67,13 @@ const cargarCategorias=()=> {
         const enlace = li.querySelector('a');
         enlace?.addEventListener('click', (event) => {
         event.preventDefault();
-      
+           
         if (categoriaActiva === categoria.nombre) {
             categoriaActiva = null;
         } else {
             categoriaActiva = categoria.nombre;
         }
-      
+        
         recargarProductosPorCategoria();
         });
 
@@ -86,20 +83,29 @@ const cargarCategorias=()=> {
     });
 };
 
-const cargarProductos = () => {
-    renderizarProductos(PRODUCTS);
-};
-
 function filtrarProductos(texto: string) {
     const productos = document.querySelectorAll("#contenedor-productos li");
+    const noResultados = document.getElementById("noResultados");
+    
+    let resultados = false
     productos.forEach((producto) => {
         const nombreProducto = producto.getAttribute('data-nombre')?.toLowerCase() || "";
         if (nombreProducto.includes(texto)) {
             (producto as HTMLElement).style.display = "";
+            resultados = true;
         } else {
             (producto as HTMLElement).style.display = "none";
         }
     })
+    if (noResultados) {
+        if (!resultados) {
+            noResultados.style.display = "";
+            listaProductos!.style.display = "none";
+        } else {
+            noResultados.style.display = "none";
+            listaProductos!.style.display = "grid";
+        }
+    }
 };
 
 function recargarProductosPorCategoria() {

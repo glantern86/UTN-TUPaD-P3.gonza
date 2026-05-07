@@ -102,6 +102,19 @@ body{
     text-transform: uppercase;
 }
 
+#noResultados {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.totalCarrito{
+    text-align: right;
+    justify-content: center;
+    align-items: right;
+    margin-right: 30px;
+}
+
 .login-form h2{
     color: var(--color-texto);
     font-size: 18px;
@@ -220,4 +233,47 @@ header {
 .cart-icon img {
     width: 24px;
     height: 24px;
+}
+
+#cart-items-list {
+    list-style: none;
+    padding: 0;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    padding: 15px;
+}
+
+.cart-item-info{
+    flex: 2;
+    margin-left: 15px;
+}
+.cart-item-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.volver {
+    display: block;
+    text-align: right;
+    margin-right: 50px;
+}
+
+.cart-item-actions button {
+    width: auto;
+    padding: 4px 10px;
+}
+.totalCarrito {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    text-align: center;
+    margin-left: 30px;
 }
