@@ -1,33 +1,58 @@
-import type { IUser } from "../types/IUser";
-import type { Rol } from "../types/Rol";
-import { getUSer, removeUser } from "./localStorage";
-import { navigate } from "./navigate";
+import { navigate } from './navigate';
+import type { IUser } from '../types/IUser';
+import type { Rol } from '../types/Rol';
 
-export const checkAuhtUser = (
-  redireccion1: string,
-  redireccion2: string,
-  rol: Rol
-) => {
-  console.log("comienzo de checkeo");
+export interface AuthUser {
+  id: number;
+  nombre: string;
+  apellido: string;
+  mail: string;
+  celular: string;
+  rol: Rol;
+  loggedIn: boolean;
+}
 
-  const user = getUSer();
-
-  if (!user) {
-    console.log("no existe en local");
-    navigate(redireccion1);
-    return;
-  } else {
-    console.log("existe pero no tiene el rol necesario");
-
-    const parseUser: IUser = JSON.parse(user);
-    if (parseUser.role !== rol) {
-      navigate(redireccion2);
-      return;
-    }
+export function getAuthUser(): AuthUser | null {
+  const data = localStorage.getItem('userData');
+  if (!data) return null;
+  try {
+    return JSON.parse(data);
+  } catch {
+    return null;
   }
-};
+}
 
-export const logout = () => {
-  removeUser();
-  navigate("/src/pages/auth/login/login.html");
-};
+export function isAuthenticated(): boolean {
+  const user = getAuthUser();
+  return user !== null && user.loggedIn === true;
+}
+
+export function hasRole(role: Rol): boolean {
+  const user = getAuthUser();
+  return user !== null && user.rol === role;
+}
+
+export function checkAuthUser(
+  loginPath: string,
+  redirectPath: string,
+  requiredRole?: Rol
+) {
+  const user = getAuthUser();
+  if (!user || !user.loggedIn) {
+    navigate(loginPath);
+    return;
+  }
+  if (requiredRole && user.rol !== requiredRole) {
+    if (user.rol === 'ADMIN') {
+      navigate('/src/pages/admin/home/home.html');
+    } else {
+      navigate('/src/pages/client/home/home.html');
+    }
+    return;
+  }
+}
+
+export function logout() {
+  localStorage.removeItem('userData');
+  navigate('/src/pages/auth/login/login.html');
+}

@@ -1,17 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Admin - Food Store</title>
+  <link rel="stylesheet" href="../../../style.css">
 </head>
-
 <body>
-    <h1>Hola desde la vista de admin</h1>
-    <button id="logoutButton">Logout</button>
-    <script type="module" src="./home.ts"></script>
+  <header>
+    <h1>Food Store - Administración</h1>
+    <div class="header-actions">
+      <button id="logoutButton" class="btn-logout">Cerrar sesión</button>
+    </div>
+  </header>
+
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <nav>
+        <ul>
+          <li><a href="#" class="active">📊 Dashboard</a></li>
+          <li><a href="../products/products.html">📦 Productos</a></li>
+          <li><a href="../categories/categories.html">📂 Categorías</a></li>
+          <li><a href="../categories/pedidos.html">📋 Pedidos</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <section class="stats-grid">
+        <div class="stat-card">
+          <h3>Total Categorías</h3>
+          <p class="stat-number" id="totalCategorias">0</p>
+        </div>
+        <div class="stat-card">
+          <h3>Total Productos</h3>
+          <p class="stat-number" id="totalProductos">0</p>
+        </div>
+        <div class="stat-card">
+          <h3>Total Pedidos</h3>
+          <p class="stat-number" id="totalPedidos">0</p>
+        </div>
+        <div class="stat-card">
+          <h3>Productos Disponibles</h3>
+          <p class="stat-number" id="productosDisponibles">0</p>
+        </div>
+      </section>
+
+      <section class="summary-panel">
+        <div class="summary-box">
+          <h4>Resumen rápido</h4>
+          <ul>
+            <li><span>Categorías activas:</span> <strong id="categoriasActivas">0</strong></li>
+            <li><span>Productos activos:</span> <strong id="productosActivos">0</strong></li>
+            <li><span>Productos inactivos:</span> <strong id="productosInactivos">0</strong></li>
+            <li><span>Pedidos pendientes:</span> <strong id="pedidosPendientes">0</strong></li>
+          </ul>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <p>©2026 Foodie Company - Panel de Administración</p>
+  </footer>
+
+  <script type="module" src="./home.ts"></script>
 </body>
-
-
 </html>

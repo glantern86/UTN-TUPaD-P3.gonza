@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis Pedidos - Food Store</title>
+  <link rel="stylesheet" href="../../../style.css">
+</head>
+<body>
+  <header>
+    <h1>Mis Pedidos</h1>
+    <nav class="header-nav">
+
+      <a href="../cart/cart.html">Carrito</a> 
+    </nav>
+    <nav class="close button">
+      <button id="logoutButton" class="logout-btn-small">Cerrar sesión</button>
+    </nav>
+
+  </header>
+
+  <main>
+    <div id="pedidos-container" class="pedidos-grid">
+    </div>
+    <div id="no-pedidos" style="display:none; text-align:center; padding:2rem;">
+      <h3>No tienes pedidos aún</h3>
+      <p>Visita la tienda y realiza tu primera compra.</p>
+      <a href="../home/home.html" class="btn-primary">Ir a la tienda</a>
+    </div>
+  </main>
+
+  <div id="modal-detalle" class="modal" style="display:none;">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <h2 id="modal-titulo">Pedido #<span id="modal-id"></span></h2>
+      <p><strong>Fecha:</strong> <span id="modal-fecha"></span></p>
+      <p><strong>Estado:</strong> <span id="modal-estado" class="badge"></span></p>
+      <p><strong>Forma de pago:</strong> <span id="modal-pago"></span></p>
+      <p><strong>Total:</strong> $<span id="modal-total"></span></p>
+      <hr>
+      <h3>Productos</h3>
+      <ul id="modal-productos" class="modal-productos-list"></ul>
+      <hr>
+      <p><strong>Subtotal:</strong> $<span id="modal-subtotal"></span></p>
+      <p><strong>Envío:</strong> $<span id="modal-envio"></span></p>
+      <p><strong>Total final:</strong> $<span id="modal-total-final"></span></p>
+    </div>
+  </div>
+
+  <script type="module" src="./orders.ts"></script>
+</body>
+</html>

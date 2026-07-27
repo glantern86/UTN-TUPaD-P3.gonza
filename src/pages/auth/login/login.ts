@@ -1,30 +1,69 @@
-import type { IUser } from "../../../types/IUser";
-import type { Rol } from "../../../types/Rol";
-import { navigate } from "../../../utils/navigate";
+// src/pages/auth/login/login.ts
+import { fetchUsers } from '../../../services/dataService';
+import { navigate } from '../../../utils/navigate';
 
-const form = document.getElementById("form") as HTMLFormElement;
-const inputEmail = document.getElementById("email") as HTMLInputElement;
-//const inputPassword = document.getElementById("password") as HTMLInputElement;
-const selectRol = document.getElementById("rol") as HTMLSelectElement;
+// Seleccionar el formulario
+const form = document.querySelector<HTMLFormElement>('#loginform');
+const errorMsg = document.createElement('p');
+errorMsg.style.color = 'red';
+errorMsg.style.marginTop = '10px';
 
-form.addEventListener("submit", (e: SubmitEvent) => {
+if (!form) {
+  throw new Error('Formulario #loginform no encontrado');
+}
+form.appendChild(errorMsg);
+
+form.addEventListener('submit', async (e: SubmitEvent) => {
   e.preventDefault();
-  const valueEmail = inputEmail.value;
-  //const valuePassword = inputPassword.value;
-  const valueRol = selectRol.value as Rol;
 
-  if (valueRol === "admin") {
-    navigate("/src/pages/admin/home/home.html");
-  } else if (valueRol === "client") {
-    navigate("/src/pages/client/home/home.html");
+  const formData = new FormData(form);
+  const email = formData.get('email') as string;
+  const password = formData.get('password') as string;
+
+  if (!email || !password) {
+    errorMsg.textContent = 'Completa todos los campos';
+    return;
   }
 
-  const user: IUser = {
-    email: valueEmail,
-    role: valueRol,
-    loggedIn: true,
-  };
+  try {
+    // 1. Buscar en el archivo JSON
+    const usersFromJson = await fetchUsers();
+    let user = usersFromJson.find(u => u.mail === email);
 
-  const parseUser = JSON.stringify(user);
-  localStorage.setItem("userData", parseUser);
+    // 2. Si no está en JSON, buscar en localStorage (usuarios registrados)
+    if (!user) {
+      const storedUsers = localStorage.getItem('users');
+      if (storedUsers) {
+        const usersFromLocal = JSON.parse(storedUsers);
+        user = usersFromLocal.find((u: any) => u.mail === email);
+      }
+    }
+
+    if (!user) {
+      errorMsg.textContent = 'Usuario no encontrado';
+      return;
+    }
+
+    if (user.password !== password) {
+      errorMsg.textContent = 'Contraseña incorrecta';
+      return;
+    }
+
+    // Guardar sesión (sin password)
+    const { password: _, ...userWithoutPassword } = user;
+    localStorage.setItem('userData', JSON.stringify({
+      ...userWithoutPassword,
+      loggedIn: true
+    }));
+
+    // Redirigir según rol
+    if (user.rol === 'ADMIN') {
+      navigate('/src/pages/admin/home/home.html');
+    } else {
+      navigate('/src/pages/store/home/home.html');
+    }
+  } catch (error) {
+    console.error('Error en login:', error);
+    errorMsg.textContent = 'Error al conectar con el servidor de usuarios';
+  }
 });

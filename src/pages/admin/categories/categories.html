@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Categorías - Food Store</title>
+  <link rel="stylesheet" href="../../../style.css">
+</head>
+<body>
+  <header>
+    <h1>Food Store - Administración</h1>
+    <div class="header-actions">
+      <button id="logoutButton" class="btn-logout">Cerrar sesión</button>
+    </div>
+  </header>
+
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <nav>
+        <ul>
+          <li><a href="../home/home.html">📊 Dashboard</a></li>
+          <li><a href="../products/products.html">📦 Productos</a></li>
+          <li><a href="#" class="active">📂 Categorías</a></li>
+          <li><a href="../orders/orders.html">📋 Pedidos</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-header-actions">
+        <h2>Gestión de Categorías</h2>
+        <button id="btnNuevaCategoria" class="btn-primary">+ Nueva Categoría</button>
+      </div>
+
+      <table class="admin-table" id="tablaCategorias">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="categoriasBody"></tbody>
+      </table>
+    </main>
+  </div>
+
+  <!-- Modal para crear/editar categoría -->
+  <div id="modalCategoria" class="modal" style="display:none;">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <h2 id="modalCategoriaTitle">Nueva Categoría</h2>
+      <form id="formCategoria">
+        <input type="hidden" id="categoriaId">
+        <label for="catNombre">Nombre *</label>
+        <input type="text" id="catNombre" required>
+        <label for="catDescripcion">Descripción *</label>
+        <textarea id="catDescripcion" rows="3" required></textarea>
+        <button type="submit" class="btn-primary">Guardar</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <p>©2026 Foodie Company - Panel de Administración</p>
+  </footer>
+
+  <script type="module" src="./categories.ts"></script>
+</body>
+</html>

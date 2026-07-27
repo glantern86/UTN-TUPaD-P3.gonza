@@ -1,39 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Food Store Login</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../../../style.css">
+        <script type="module" src="./login.ts"></script>
+    </head>
+    
+    <body>
+        <div class="container">
+            <form class="login-form" id="loginform">
+                <h1>Food Store</h1>
+                <h2>Iniciar Sesión</h2>
+                
+                <label for="email">Email:</label>
+                <input input 
+                type="email" 
+                id="email" 
+                name="email" 
+                placeholder="micorreo@mail.com" 
+                required>
+                
+                <label for="password">Contraseña:</label>
+                <input input 
+                type="password" 
+                id="password" 
+                name="password" 
+                placeholder="Mínimo 8 caracteres" 
+                required>
 
-<body>
-    <h1> Login</h1>
+                <button type="submit">INGRESAR</button>
 
-    <form id="form">
-
-        <div>
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" autocomplete="off" placeholder="example@example.com">
+                <p class="registro">No tenés cuenta? <a href="../registro/registro.html">Registrate</a>
+                </p>
+            </form>
         </div>
-        <div>
-            <label for="password">password</label>
-            <input type="password" id="password" name="password" autocomplete="off" placeholder="********">
-        </div>
-        <div>
-            <label for="rol">Rol</label>
-            <select name="rol" id="rol">
-                <option value="">Seleccione un rol</option>
-                <option value="client">Cliente</option>
-                <option value="admin">Admin</option>
-            </select>
-        </div>
-
-        <button type="submit">Ingresar</button>
-
-    </form>
-
-    <script type="module" src="./login.ts"></script>
-</body>
-
+    </body>
 </html>
